@@ -1,0 +1,672 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Mitch MacLellan | Motch.ca</title>
+  <meta name="description" content="Hi, I'm Motch. Professional web developer and hobbyist game developer">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <!-- Place favicon.ico in the root directory -->
+
+  <link href="https://fonts.googleapis.com/css?family=Fira+Sans&display=swap" rel="stylesheet">
+
+  <meta name="theme-color" content="#1d1d1d">
+  <style>
+    body {
+      background: #1d1d1d;
+      font-family: 'Fira Sans', sans-serif;
+      margin: 0;
+    }
+
+    * {
+      box-sizing: border-box; 
+
+    }
+    .svgContainer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      z-index: 2;
+      opacity: 0;
+    }
+
+    .svgContainer svg {
+      width: 50vw;
+    }
+
+    .svgContainer svg path {
+      transform-origin: center;
+      opacity: 0;
+    }
+
+    .header {
+      position: relative;
+      height: 100vh;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex.row {
+      flex-direction: row;
+    }
+
+    .flex > .grow {
+      flex: 1;
+    }
+
+    canvas {
+
+      margin: 0 auto;
+    }
+
+    .demo {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 2;
+      opacity: 0;
+      animation: fadeIn 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) 3s forwards;
+    }
+
+    .blurb {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      z-index: 3;
+    }
+
+    .welcome {
+      font-size: 4em;
+      color: #fafafa;
+      margin-bottom: 2rem;
+      padding: 4rem;
+      flex: 1;
+    }
+
+    .links {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 4rem;
+      align-items: flex-end;
+      font-size: 4em;
+    }
+
+    .links a {
+      display: block;
+    }
+
+    .welcome span {
+      display: block;
+    }
+
+    .welcome h1 {
+      margin: 0;
+    }
+
+    .welcome .description {
+      font-size: 2rem;
+    }
+
+    .welcome .split {
+      width: 18vw;
+    }
+
+    .welcome .cta {
+      font-size: 1rem;
+      border: 1px solid #ccc;
+      padding: 1em;
+      margin: 1em 0;
+          display: inline-block;
+    }
+
+    .highlight.primary {
+      color: #FF5D6F
+    }
+
+    .highlight.secondary {
+      color: #359BCC;
+    }
+
+    .bgSvg {
+      position: absolute;
+      height: 100vh;
+      width: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      opacity: 0;
+    }
+
+    .bgSvg svg {
+      width: 100%;
+      height: 100%;
+      opacity: 0.6;
+    }
+
+    .bgSvg svg path {
+      opacity: 0;
+    }
+
+    .logoSvg {
+          z-index: 4;
+    position: absolute;
+    width: 100%;
+    height: auto;
+    padding: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    }
+
+    .logoSvg svg {
+      width: 200px;
+      height: 200px;
+    }
+
+    .welcome .button.cta {
+      border: 3px solid #FFFA75;
+      padding: 0.5em;
+      margin: 1em 0 0.5em 0;
+      display: inline-block;
+      color: #FFFA75;
+      text-decoration: none;
+    }
+
+    .welcome .animOne {
+      opacity: 0;
+      font-size: 1.4em;
+      animation: fadeInUp 0.6s cubic-bezier(0.68, -0.55, 0.29, 1.13) 2.2s forwards;
+      margin-bottom: 0.25em;
+    }
+
+    .welcome .animTwo {
+      opacity: 0;
+      animation: fadeInUp 0.6s cubic-bezier(0.68, -0.55, 0.29, 1.13) 2.8s forwards;
+    }
+
+    .welcome .animThree {
+      opacity: 0;
+      font-size: 1em;
+      animation: fadeInUp 0.6s cubic-bezier(0.68, -0.55, 0.29, 1.13) 3.4s forwards;
+    }
+
+    .welcome .animFour {
+      opacity: 0;
+      font-size: 0.8em;
+      margin-left: 6rem;
+      margin-top: 1rem;
+      animation: fadeInUp 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 3.1s forwards;
+    }
+
+    .welcome .animFive {
+      opacity: 0;
+      background: #0c0f1a;
+
+    }
+
+    .welcome .aboutFeature {
+      display: flex;
+      align-items: center;
+        display: none;
+    }
+
+    .welcome .aboutFeature svg {
+      width: 200px;
+      height: 200px;
+    }
+
+    .welcome .aboutFeature .name {
+      margin-left: 0.5em;
+      font-size: 3rem;
+    }
+
+    .splitBg {
+      z-index: 2;
+      position: absolute;
+      width: 100%;
+      height: 125%;
+      display: flex;
+      transform: rotate(-6.5deg) translate(61px, -10%);
+    }
+
+    .splitBg .left {
+      flex: 1;
+      background: #fe5e70;
+      color: white;
+      justify-content: center;
+      align-items: flex-end;
+      font-size: 3em;
+      display: flex;
+      animation: fadeInDown 0.8s cubic-bezier(0.68, -0.55, 0.4, 1.1) 1.2s forwards;
+      margin-left: calc(-3em + 3px);
+      padding-right: 3em;
+      opacity: 0;
+      outline: 1px solid transparent;
+    }
+
+    .splitBg .right {
+      flex: 1;
+      display: flex;
+    background: #359acb;
+    color: white;
+    justify-content: center;
+    align-items: flex-end;
+    font-size: 3em;
+    animation: fadeInUp 0.8s cubic-bezier(0.68, -0.55, 0.4, 1.1) 1.2s forwards;
+    opacity: 0;
+    outline: 1px solid transparent;
+    margin-left: -1px;
+          }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -100%, 0);
+        transform: translate3d(0, -100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 100%, 0);
+        transform: translate3d(0, 100%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(-100%, 0, 0);
+        transform: translate3d(-100%, 0, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes twistInRedRing {
+      from {
+        opacity: 0;
+        transform: rotate(90deg) translate(2px, -8px);
+      }
+      to {
+        opacity: 1;
+        transform: rotate(0) translate(0, 0);
+      }
+    }
+
+    @keyframes fadeInDownHalf {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, -50%, 0);
+        transform: translate3d(0, -50%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+    @keyframes fadeInUpHalf {
+      from {
+        opacity: 0;
+        -webkit-transform: translate3d(0, 50%, 0);
+        transform: translate3d(0, 50%, 0);
+      }
+
+      to {
+        opacity: 1;
+        -webkit-transform: translate3d(0, 0, 0);
+        transform: translate3d(0, 0, 0);
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+  <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+  <![endif]-->
+
+  <div class="header">
+    <div class="blurb">
+      <div class="welcome">
+        <h1 class="animOne">Hi, I'm Motch</h1>
+        <div class="flex row">
+          <div class="grow animTwo">
+            <div class="description">
+              I'm a full stack web developer in Halifax, Canada specializing in front end development and user experience.
+            </div>
+            <a class="cta">
+              More about me
+            </a>
+          </div>
+          <div class="split"></div>
+          <div class="grow animThree">
+            <div class="description">
+              I'm also a hobbyist graphic designer, game developer, pixel artist and music maker. 
+            </div>
+            <a class="cta">
+              Explore my projects
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="logoSvg">
+			<svg
+										xmlns:dc="http://purl.org/dc/elements/1.1/"
+										xmlns:cc="http://creativecommons.org/ns#"
+										xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+										xmlns:svg="http://www.w3.org/2000/svg"
+										xmlns="http://www.w3.org/2000/svg"
+										xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+										xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+										width="85"
+					height="85"
+		 viewBox="0 0 22.489582 22.489583"
+	 version="1.1"
+	id="svg8"
+ inkscape:version="0.92.4 (5da689c313, 2019-01-14)"
+ sodipodi:docname="logo5.svg">
+				<defs
+ id="defs2">
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1133"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1125"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1113"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1046"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1042"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1038"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1034"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1030"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect1022"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect863"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect859"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect855"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				<inkscape:path-effect
+ effect="bspline"
+ id="path-effect859-4"
+ is_visible="true"
+ weight="33.333333"
+ steps="2"
+ helper_size="0"
+ apply_no_weight="true"
+ apply_with_weight="true"
+ only_selected="false" />
+				</defs>
+				<sodipodi:namedview
+ id="base"
+ pagecolor="#ffffff"
+ bordercolor="#666666"
+ borderopacity="1.0"
+ inkscape:pageopacity="0.0"
+ inkscape:pageshadow="2"
+ inkscape:zoom="5.6568542"
+ inkscape:cx="27.117567"
+ inkscape:cy="30.776875"
+ inkscape:document-units="mm"
+ inkscape:current-layer="layer1"
+ showgrid="false"
+ inkscape:window-width="1920"
+ inkscape:window-height="1027"
+ inkscape:window-x="1912"
+ inkscape:window-y="-8"
+ inkscape:window-maximized="1"
+ fit-margin-top="1"
+ fit-margin-left="1"
+ fit-margin-bottom="1"
+ fit-margin-right="1"
+ showguides="true"
+ inkscape:snap-others="false"
+ inkscape:snap-grids="false"
+ inkscape:snap-to-guides="true"
+ inkscape:object-nodes="false"
+ units="px" />
+				<metadata
+ id="metadata5">
+				<rdf:RDF>
+				<cc:Work
+ rdf:about="">
+				<dc:format>image/svg+xml</dc:format>
+				<dc:type
+ rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+				<dc:title></dc:title>
+				</cc:Work>
+				</rdf:RDF>
+				</metadata>
+				<g
+ inkscape:groupmode="layer"
+ id="layer1"
+ inkscape:label="Logo 1"
+ transform="translate(0,-0.45368911)" />
+				<g
+ inkscape:groupmode="layer"
+ id="layer8"
+ inkscape:label="Logo"
+ style="display:inline"
+ transform="translate(-3.2606902,-4.466583)">
+				<path
+ style="fill:#359bcc;stroke:none;stroke-width:0.20097874px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:twistInRedRing 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s forwards;transform-origin:center;opacity:0;"
+ d="m 4.2606902,15.6783 c 0.063566,5.017679 4.1077579,10.636337 10.8142248,10.259932 4.12651,-0.231604 8.990977,-3.748657 8.893225,-9.675286 -0.09775,-5.926629 -5.617908,-9.9848753 -9.70202,-9.258263 0.162199,1.65894 0.191297,3.104324 0.402684,5.187137 1.184,-0.298494 4.798248,-0.02299 5.420892,4.403042 0.05242,2.503033 -2.075626,5.179842 -5.309157,5.439943 C 10.66269,22.091928 8.3104754,18.768879 8.2084869,16.047921 7.9651061,9.5547457 14.285182,7.1720182 14.285182,7.1720182 c 0,0 -0.04686,-0.3519078 -0.217876,-2.1591243 C 7.2696092,6.2823191 4.3432145,11.229439 4.2606902,15.6783 Z"
+ id="path881"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="cszccccsccc" />
+				<path
+ style="fill:#ff5d6f;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:twistInRedRing 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.1s forwards;transform-origin:center;opacity:0;"
+ d="m 14.26612,7.004683 c -4.7167187,0.9822155 -7.7836955,3.999404 -8.0470838,7.883037 -0.2624688,3.870075 1.7266659,9.269287 8.6916328,9.306934 0.0244,1.32e-4 0.561487,0.025 1.284673,-0.161032 L 15.66416,19.088198 c -0.684924,0.336137 -1.167241,0.378565 -1.190635,0.383601 C 10.730472,20.277504 7.8961675,16.341813 8.0018116,14.021487 8.2357753,8.8827994 12.148096,7.2219202 14.26612,7.004683 Z"
+ id="path883"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="czccsc" />
+				<path
+ style="fill:#ff5d6f;stroke:none;stroke-width:0.20097874px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:twistInRedRing 0.6s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s forwards;transform-origin:center;opacity:0;"
+ d="m 14.147714,5.9082739 0.19353,1.8241906 C 22.760303,7.5125497 25.766149,14.785256 22.302182,21.88702 27.875627,15.169837 23.09342,5.4597373 14.147714,5.9082739 Z"
+ id="path885"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="cccc" />
+				<path
+ style="fill:#359bcc;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.3s forwards;transform-origin:center;opacity:0;"
+ d="m 11.921058,13.299359 c -0.622998,0.648348 -1.659408,1.834132 -0.777589,3.408522 0.542911,1.644805 1.544708,2.473123 2.724272,2.422941 0.02807,0.159686 0.07682,0.275964 0.104891,0.43565 1.035387,-0.182744 1.305962,-0.113306 1.853523,-0.432476 l -0.434847,-2.919007 z"
+ id="path894"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="ccccccc" />
+        <path
+ style="fill:#ff5d6f;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.3s forwards;transform-origin:center;opacity:0;"
+ d="m 15.321028,16.243928 0.337341,2.842257 c 0.83208,-0.0883 2.055188,-1.013494 2.36637,-2.515663 0.371869,-0.67391 0.487423,-2.141569 -0.397479,-3.013916 z"
+ id="path898"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="ccccc" />
+				<path
+ style="fill:#ff5d6f;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.3s forwards;transform-origin:center;opacity:0;"
+ d="m 14.735716,11.245244 -0.185194,0.128642 0.206098,2.556894 0.247115,-0.116682 c 1.003213,-0.537779 0.956361,-1.745285 0.392744,-2.679939 -0.240717,0.02826 -0.425892,0.05944 -0.660763,0.111082 z"
+ id="path892"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="ccccccc" />
+				<path
+ style="fill:#359bcc;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeIn 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.3s forwards;transform-origin:center;opacity:0;"
+ d="m 13.958099,11.544755 c -0.378748,0.807745 -0.294476,1.859403 0.798521,2.386028 0.09271,-0.03786 0.171978,-0.07469 0.247115,-0.116682 l -0.268019,-2.568857 z"
+ id="path890"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="ccccc" />
+        <path
+ style="fill:#ff5d6f;stroke:none;stroke-width:0.20097874px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeIn 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.5s forwards;transform-origin:center;opacity:0;"
+ d="m 14.147714,5.9082739 0.19353,1.8241906 C 22.760303,7.5125497 25.766149,14.785256 22.302182,21.88702 27.875627,15.169837 23.09342,5.4597373 14.147714,5.9082739 Z"
+ id="path885"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="cccc" />
+        <path
+ style="fill:#ffffff;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeInUpHalf 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.2s forwards;transform-origin:center;opacity:0;"
+ d="m 14.859785,16.274271 c 1.418516,0.01092 2.792073,-1.06773 2.767477,-2.717665 1.152583,2.344133 0.167537,4.568478 -2.000708,5.541553 l 0.56679,4.935447 c 3.648617,-0.779884 5.788456,-4.191152 5.678838,-6.991871 -0.369173,-3.155072 -2.441095,-6.276881 -6.475701,-5.907573 0,0 1.199824,2.018924 -0.639859,2.796621 0,0 -0.183491,-0.08387 -0.141223,0.06047 -0.05464,1.353062 0.244386,2.28302 0.244386,2.28302 z"
+ id="path888"
+ inkscape:connector-curvature="0"
+ sodipodi:nodetypes="cccccccc" />
+        <path
+ sodipodi:nodetypes="ccccccsscccc"
+ inkscape:connector-curvature="0"
+ id="path1473"
+ d="m 14.26612,7.004683 c -4.6111591,0.5333066 -5.784564,4.24712 -6.0108325,4.827199 -1.4899984,5.090832 2.6127525,8.045224 5.6251145,7.744848 0.420434,-0.02652 0.65491,-0.08976 0.940474,-0.172698 -3.564827,-0.688906 -4.348582,-3.547219 -2.899805,-6.104697 0.381756,2.094856 1.677997,2.96521 2.938725,2.974912 0,0 0.05655,-0.207705 -0.02185,-1.431319 -0.03716,-0.580044 -0.01903,-0.687465 -0.02485,-0.898833 -0.0012,-0.04441 -0.05647,-0.01334 -0.05647,-0.01334 -1.57508,-0.798905 -0.798521,-2.386028 -0.798521,-2.386028 0.267818,-0.09226 0.509799,-0.207253 0.777617,-0.299511 z"
+ style="fill:#ffffff;stroke:none;stroke-width:0.26458332px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;animation:fadeInDownHalf 0.8s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.2s forwards;transform-origin:center;opacity:0;" />
+        </g>
+      </svg>
+    </div>
+    <div class="splitBg">
+      <div class="left">
+      </div>
+      <div class="right">
+      </div>
+    </div>
+  </div>
+</body>
+</html>
