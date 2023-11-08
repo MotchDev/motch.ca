@@ -1,0 +1,704 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Lyrely | Motch.ca</title>
+  <meta name="description"
+        content="Lyrely was created to fill a gap in online music portfolio software as it is specifically aimed at video game composers.">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=PT+Sans:wght@400;700&family=Space+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+  <meta name="theme-color" content="#372362">
+
+  <style>
+
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    * {
+      margin: 0;
+    }
+
+    body {
+      line-height: 1.5;
+      overflow: hidden auto;
+      -webkit-font-smoothing: antialiased;
+      opacity: 0;
+    }
+
+    body.ready {
+      opacity: 1;
+    }
+
+    img, picture, video, canvas {
+      display: block;
+      max-width: 100%;
+    }
+
+    input, button, textarea, select {
+      font: inherit;
+    }
+
+    p, h1, h2, h3, h4, h5, h6 {
+      overflow-wrap: break-word;
+    }
+
+
+    html {
+      background: #FF9ACD;
+      color: #28184A;
+      font-family: 'PT Sans', sans-serif;
+    }
+
+
+    .main h2 {
+      margin-top: 8px;
+    }
+
+    .main h3 {
+      margin-top: 16px;
+      margin-bottom: 24px;
+    }
+
+
+    h1 {
+      font-weight: normal;
+      line-height: 1;
+    }
+
+    h2 {
+      font-weight: bold;
+    }
+
+    h3 {
+      font-size: 16px;
+      font-weight: bold;
+
+    }
+
+    h4 {
+      font-weight: bold;
+      font-size: 14px;
+      color: #d38baf;
+    }
+
+
+    .project svg {
+      transform: scale(0);
+      position: absolute;
+      transition: 0.5s ease-out;
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    a.project:hover svg {
+      transform: scale(4);
+    }
+
+
+    .svg-bleedover svg {
+      max-width: 100%;
+    }
+
+    nav {
+      position: fixed;
+      top: 0;
+      line-height: 1;
+      width: 100vw;
+      height: 26px;
+      padding: 0 6px;
+      display: flex;
+      z-index: 1;
+      justify-content: space-between;
+      background-color: #28184A;
+      border-bottom: 2px solid #FF9ACD;
+    }
+
+    nav .home, nav .next {
+      color: #DCC6E0;
+      font-size: 14px;
+    }
+
+    nav a {
+      text-decoration: none;
+    }
+
+    nav .name {
+      position: absolute;
+      color: #FF9ACD;
+      font-size: 34px;
+      line-height: 22px;
+      width: 100vw;
+      top: 0;
+      left: 0;
+      text-align: center;
+      z-index: -1;
+    }
+
+    .hero {
+      background: linear-gradient(180deg, rgba(22, 14, 40, 0.6) 0%, rgba(22, 14, 40, 0.6) 0.01%, rgba(40, 24, 74, 0.6) 99.17%), url('/images/lyrely.webp');
+      height: calc(100vh - 124px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .hero .title {
+      font-size: 600px;
+      line-height: 1;
+      letter-spacing: -0.13em;
+      color: #FF9ACD;
+    }
+
+    section {
+      background: #FF9ACD;
+      color: #28184A;
+      padding-bottom: 250px;
+      padding-top: 50px;
+    }
+
+    section:nth-of-type(even) {
+      background: #28184A;
+      color: #FF9ACD;
+    }
+
+
+    section:nth-of-type(even) .flex-wrapper {
+      flex-direction: row-reverse;
+    }
+
+    section .svg-bleedover {
+      position: relative;
+      top: -150px;
+      height: 24px;
+    }
+
+
+    section.section-tech {
+      margin-top: 50px;
+      padding-top: 100px;
+      padding-bottom: 300px;
+    }
+
+    section.section-frontend {
+      margin-top: 50px;
+      padding-top: 100px;
+    }
+
+    section.section-frontend .svg-bleedover {
+      top: -250px;
+    }
+
+
+    section.section-tech .svg-bleedover {
+      top: -250px;
+    }
+
+    .section-content {
+      max-width: 1520px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 96px;
+      text-transform: uppercase;
+      letter-spacing: -0.03em;
+      margin-bottom: 78px;
+    }
+
+    h2 {
+      font-weight: bold;
+      letter-spacing: -0.03em;
+      font-size: 36px;
+      text-transform: uppercase;
+      line-height: 1;
+      margin-bottom: 14px;
+    }
+
+    .flex-wrapper {
+      display: flex;
+    }
+
+    .copy-block {
+      margin-bottom: 32px;
+    }
+
+    .image-block {
+      text-align: center;
+      font-size: 14px;
+      font-weight: bold;
+    }
+
+    .text-content {
+    }
+
+    .image-content {
+    }
+
+    .image-content img {
+      max-width: 100%;
+    }
+
+    .image-content video {
+      max-width: 100%;
+    }
+
+    .media-content {
+      padding: 16px;
+    }
+
+
+    p + p {
+      margin-top: 16px;
+    }
+
+    .hero .title {
+      font-size: 60px;
+      line-height: 1;
+      letter-spacing: -0.13em;
+      color: #FF9ACD;
+    }
+
+
+    @media only screen and (min-width: 768px) {
+      .hero .title {
+        font-size: 366px;
+        margin-left: -80px;
+      }
+
+    }
+
+    @media only screen and (min-width: 1400px) {
+
+      nav {
+        background: url('data:image/svg+xml,<svg width="1920" height="60" viewBox="0 0 1920 60" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M581.5 56.5C232.5 66.5 -21.5002 43.5 -21.5002 43.5L-21.5 -15.5L69.9999 -65C355.667 -59 970.9 -47 1146.5 -47C1366 -47 1849 -44 1919.5 -30.5C1990 -17 2079 56 2079 56C2079 56 1754 48 1428.5 43.5C1103 39 930.5 46.5 581.5 56.5Z" fill="%2328184A"/></svg>'),
+        url('data:image/svg+xml,<svg width="1920" height="65" viewBox="0 0 1920 65" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M558.5 65C503.666 65 3 63 -18 45L-18 4L-15 -32L1929 -17L1992 39C1992 52 2004.45 65.8574 1591 53C1076.5 37 913.5 65 558.5 65Z" fill="%23FF9ACD"/></svg>');
+        background-repeat: no-repeat;
+        border: 0;
+        line-height: 44px;
+        height: 68px;
+        padding: 0 12px;
+        justify-content: space-between;
+      }
+
+      nav .home, nav .next {
+        color: #DCC6E0;
+        font-size: 40px;
+      }
+
+      nav a {
+        text-decoration: none;
+      }
+
+      nav .name {
+        position: absolute;
+        color: #FF9ACD;
+        font-size: 60px;
+        width: 100%;
+        top: 0;
+        left: 0;
+        line-height: 42px;
+        text-align: center;
+        z-index: -1;
+      }
+
+      .hero {
+        background: linear-gradient(180deg, rgba(22, 14, 40, 0.6) 0%, rgba(22, 14, 40, 0.6) 0.01%, rgba(40, 24, 74, 0.6) 99.17%), url('/images/lyrely.webp');
+        height: calc(100vh - 124px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .hero .title {
+        font-size: 600px;
+        margin-left: 0;eeee4
+      }
+
+      section {
+        background: #FF9ACD;
+        color: #28184A;
+        padding-bottom: 250px;
+        padding-top: 50px;
+      }
+
+      section:nth-of-type(even) {
+        background: #28184A;
+        color: #FF9ACD;
+      }
+
+
+      section:nth-of-type(even) .flex-wrapper {
+        flex-direction: row-reverse;
+      }
+
+      section .svg-bleedover {
+        position: relative;
+        top: -150px;
+        height: 24px;
+      }
+
+
+      section.section-tech {
+        margin-top: 50px;
+        padding-top: 100px;
+        padding-bottom: 300px;
+      }
+
+      section.section-frontend {
+        margin-top: 50px;
+        padding-top: 100px;
+      }
+
+      section.section-frontend .svg-bleedover {
+        top: -250px;
+      }
+
+
+      section.section-tech .svg-bleedover {
+        top: -250px;
+      }
+
+      .section-content {
+        max-width: 1520px;
+        margin: 0 auto;
+      }
+
+      h1 {
+        font-size: 96px;
+        text-transform: uppercase;
+        letter-spacing: -0.03em;
+        margin-bottom: 78px;
+      }
+
+      h2 {
+        font-weight: bold;
+        letter-spacing: -0.03em;
+        font-size: 36px;
+        text-transform: uppercase;
+        line-height: 1;
+        margin-bottom: 14px;
+      }
+
+      .flex-wrapper {
+        display: flex;
+      }
+
+      .copy-block {
+        margin-bottom: 48px;
+        font-size: 18px;
+      }
+
+      .image-block {
+        padding-left: 72px;
+        text-align: center;
+        padding-top: 48px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+
+      .text-content {
+        width: 50%;
+      }
+
+      .image-content {
+        width: 50%;
+      }
+
+      .image-content img {
+        max-width: 100%;
+      }
+
+      .image-content video {
+        max-width: 100%;
+      }
+
+      .media-content {
+        width: 50%;
+        padding: 48px 0 48px 84px;
+      }
+
+
+      p + p {
+        margin-top: 16px;
+      }
+
+    }
+
+
+  </style>
+  <script>
+    window.addEventListener('scroll', () => {
+      const topWave = document.querySelectorAll('.topwave')[0]
+      const bottomWave = document.querySelectorAll('.bottomwave path')[0]
+      const motch = document.querySelectorAll('.motch')[0]
+      const scrollAmount = window.scrollY / 20
+      topWave.style.top = -scrollAmount + 'px'
+      bottomWave.style.transform = `translateY(${700 - scrollAmount}px)`
+      motch.style.bottom = scrollAmount + 'px'
+    })
+
+    document.fonts.ready.then(() => {
+      document.body.classList.add("ready")
+    });
+  </script>
+</head>
+
+<body>
+
+<div id="lyrely" class="project-page">
+  <nav>
+    <a class="home" href="/">HOME</a>
+    <div class="name">MITCH MACLELLAN</div>
+    <a class="next">NEXT PROJECT</a>
+  </nav>
+  <div class="hero">
+    <div class="title">LYRELY</div>
+  </div>
+  <section>
+    <div class="svg-bleedover">
+      <svg width="1920" height="141" viewBox="0 0 1920 141" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1027.5 29.6887C521 129.188 20 7.68881 -21.5 9.68881V283.689L1970.5 255.189V92C1857.67 114.667 1534 -69.8111 1027.5 29.6887Z"
+          fill="#FF9ACD"/>
+      </svg>
+    </div>
+    <div class="section-content">
+      <h1>MUSIC PORTFOLIO SOFTWARE</h1>
+      <div class="flex-wrapper">
+        <div class="text-content">
+
+          <div class="copy-block">
+            <h2>ABOUT LYRELY</h2>
+            <p>Lyrely was created to fill a gap in online music portfolio software as it is specifically aimed at video
+              game composers. It needed to do three things well: </p>
+            <ul>
+              <li>Have a web player that sits on an artist’s page nicely (no iframes, mobile support)</li>
+              <li>Stream high quality music that would support gapless looping</li>
+              <li>Secure media files and password protected portfolios due to NDAs and the nature of game development.
+              </li>
+            </ul>
+          </div>
+
+          <div class="copy-block">
+            <h2>AUDIO QUALITY</h2>
+            <p>Music is the heart of the platform and there are many different music file formats all with various ups
+              and downs, OS support, etc. I was working with a friend of mine, Tommy Pedrini to help me determine how to
+              maximize sound quality while attempting to keep the file size low. At first we started with AAC, designed
+              to be the successor to MP3 files. AAC, while better than MP3s in terms of file size and audio quality was
+              still not reaching the standard that we hoped to achieve. </p>
+            <p>
+              OPUS was the answer to our audio quality problems, it supports near-lossless audio wrapped in a reasonable
+              file size (5-8mb typically). However it is not supported on Apple devices unless wrapped as a CAF file,
+              this added some additional complexity in how audio files are converted and served (more on this in the
+              Tech Stack area).
+            </p>
+          </div>
+          <div class="copy-block">
+            <h2>WEB PLAYER</h2>
+            <p>The web player takes advantage of Audio Streaming, HTML Canvas and the Web Audio API to deliver quick
+              load times, advanced visualizer features and gapless looping. The audio visualization features (dynamic
+              waveform and particle effects) and gapless looping required use of the Web Audio API. However, the Web
+              Audio API meant that users would have to download the entire song before any music would begin to play.
+              This delay was extremely noticeable and made the player feed sluggish and broken.
+            </p>
+            <p>
+              The fix was a hybrid approach: when a user presses play on a song the player will use native HTML Audio
+              Streaming to begin playback. In the background it begins downloading the entire song file and once that
+              download is complete it begins playing the song again at 0% volume using the Web Audio API. Finally, it
+              fades the audio stream out and the Web Audio player in. By fading one audio source out and the other in at
+              the same time, the user doesn’t notice the switch. With full access to the Web Audio API stream we can use
+              FFTs to analyze the incoming audio (to determine “energy” for the particle systems / visualizers) and
+              setup loop points for seamless loops.
+            </p>
+          </div>
+        </div>
+        <div class="media-content">
+          <div id="ba993c0e-929e-4586-b7d1-1bc70fc8d1c1">
+            <script
+              src="https://lyrely.com/api/player/ba993c0e-929e-4586-b7d1-1bc70fc8d1c1?id=p5&theme=light&showTrackArt=0&trackArtSize=normal&showWaveform=1&showPlayControls=1&showTrackInformation=1&showTrackProgressBar=0"
+              async type="text/javascript"></script>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="section-tech">
+    <div class="svg-bleedover">
+      <svg width="1920" height="201" viewBox="0 0 1920 201" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M509 2.81213C75 -16.1879 -44.0005 67.3132 -44.0005 67.3132V184.813L1957 200.313V48.8121C1957 48.8121 1777 130.312 1429.5 133.812C1082 137.312 943 21.8121 509 2.81213Z"
+          fill="#28184A"/>
+      </svg>
+    </div>
+
+
+    <div class="section-content">
+      <div class="flex-wrapper">
+        <div class="text-content">
+          <h1>BACK END TECH</h1>
+
+          <div class="copy-block">
+            <h2>EXPRESS REST(ISH) API </h2>
+            <p>The back end is primarily powered by Node/Express running on EC2 on AWS. The express API uses Sequelize,
+              an ORM for MySQL to handle communication with the RDS DB and help ease query writing. Most of the back end
+              operations are simple creates, updates and deletes however it is also responsible for dynamically
+              generating the web player script when a user places one on their website.
+            </p>
+            <p>
+              Due to the nature of game audio (NDAs, etc): the public facing APIs must use a combination of local ids
+              and UUIDs (long, non-sequential ids) which cannot be guessed in order to reference any files. For example,
+              when a user presses play on a web player it will ask the API for track #3 (a local id for that player).
+              The API will then return a temporary URL pointing at the file which expires in a couple of minutes. Due to
+              how the player works by downloading song buffers, these links only need to be briefly available until the
+              download completes. These techniques ensure that files will not be leaked. </p>
+
+          </div>
+
+          <div class="copy-block">
+            <h2>FILE PROCESSING</h2>
+            <p>File processing and conversion is an expensive (consumes a lot of CPU cycles) operation. It was important
+              to find a way to avoid doing this on the server that’s running the API to avoid any slowdowns as it’s
+              needed to serve the web players to people swiftly. I was able to use AWS’s Lambda service to handle the
+              conversions without impacting the API server. It automatically triggers when any audio files are added to
+              a specific Amazon S3 folder.
+            </p>
+            <p>
+              For best results and to avoid weird conversion issues, using FFMPEG to convert whatever file was uploaded
+              to .wav first was the safest course of action. Next, it needs to generate the waveform data for the front
+              end to use via a library by the BBC called “audiowaveform”. Finally, it converts the audio files to OPUS
+              and CAF, moves them to the “complete” folder on S3 and flags the conversion as complete in the database.
+            </p>
+            <p>
+              Using Lambda was not without issues however, in order to support converting to both OPUS and CAF, I had to
+              build a custom version of FFMPEG with that support added and upload it to the Lambda layer. The next
+              problem was difficulty talking to the database server once the conversion was complete. It needs to update
+              the track row in the database and tell the rest of the system that the conversion completed successfully
+              but for some reason I was unable to get the AWS permissions to allow access to S3 (the files) and RDS (the
+              database) at the same time. As a result, I ended up setting up a second Lambda service that runs after the
+              file conversion which has access to the database but not the files. It receives the conversion status and
+              is able to update the correct database row.
+            </p>
+          </div>
+
+        </div>
+        <div class="image-content">
+          <img src="images/techStack.webp" alt="A flow chart of the tech stack"/>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section-frontend">
+    <div class="svg-bleedover">
+      <svg width="1920" height="141" viewBox="0 0 1920 141" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path
+          d="M1027.5 29.6887C521 129.188 20 7.68881 -21.5 9.68881V283.689L1970.5 255.189V92C1857.67 114.667 1534 -69.8111 1027.5 29.6887Z"
+          fill="#FF9ACD"/>
+      </svg>
+    </div>
+    <div class="section-content">
+      <h1>FRONT END APPLICATION</h1>
+      <div class="flex-wrapper">
+        <div class="text-content">
+          <div class="copy-block">
+            <h2>REACT, RTK-QUERY AND TAILWIND</h2>
+            <p>
+              The front end management application is built on React, uses RTK-Query to fetch data from the backend and
+              Tailwind for quick and easy styling. React is my bread and butter when it comes to web development. I
+              enjoy working with it significantly more than Angular or VueJS so it of course made sense to use it for
+              this project. It was my first time using RTK-Query, all of my previous projects involved manually fetching
+              API data and managing it with local state or Redux. RTK-Query simplifies this significantly and makes
+              using Redux a lot easier to manage. I will be using RTK-Query going forward for API and app state without
+              a doubt.
+            </p>
+            <p>
+              Tailwind has probably been one of the biggest quality of life changes to front end development for me. I
+              know it has cons but the simple fact that I no longer need to think of class names is such a blessing.
+              Trying to name something a useful name one of the hardest parts of development and it gets much worse on
+              the front end when several container elements are required to achieve a certain layout. Tailwind removes
+              all those several minute blockers and makes styling quick and easy.
+            </p>
+          </div>
+        </div>
+        <div class="image-content">
+          <div class="image-block">
+            <img src="images/trackEdit.webp" alt="A screenshot of Lyrely's track edit page"/>
+            <div>Editing a Track</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-wrapper">
+        <div class="text-content">
+          <div class="copy-block">
+            <h2>LIBRARY MANAGEMENT QOL</h2>
+            <p>Library management is a big part of creating and publishing playlists (web players) and portfolios. It’s
+              very important that this aspect of the application feel good for users. One of the first major debates I
+              had with myself was surrounding how to store playlist data. A couple of composers that I spoke to
+              expressed interest in being able to easily move folders and tracks between playlists. Given that order is
+              important, I felt the easiest way to achieve this was going to be a JSON blob representing all playlists
+              so playlists, folders and items can be easily rearranged without multiple rows manually managing “order”.
+              There are some potential long term concerns with storing large datasets in JSON, however I tested
+              inserting 100k rows into the database with the proposed data structure and there was no noticeable
+              degradation in speed.
+            </p>
+            <p>
+              Once users were using the platform it became obvious how important multi-selection features were. Most
+              applications I had built in the past had click being the default action to go places. However, once I
+              realized how important it would be to select tracks, folders, etc I changed all the interfaces to have
+              click select instead of “open”. Additionally I added options for CTRL to select additional items and Shift
+              to group select into the Tracks and Playlist areas with support to drag/drop multiple as well. While these
+              were major quality of life improvements, the final step was to add some rudimentary copy / paste features
+              to the playlist areas to allow for easier duplication of data across players.
+            </p>
+          </div>
+        </div>
+        <div class="image-content">
+          <div class="image-block">
+            <video controls>
+              <source src="images/lyrelyDemo.webm" type="video/webm"/>
+            </video>
+            <div>Managing your library with multiselect</div>
+          </div>
+        </div>
+      </div>
+      <div class="flex-wrapper">
+        <div class="text-content">
+
+          <div class="copy-block">
+            <h2>PORTFOLIO EDITOR WITH TIPTAP</h2>
+            <p>Portfolio’s allow users to quickly create a landing page with a web player on it that they can send to
+              prospective clients. These pages can be password protected to prevent any sensitive data (tracks, personal
+              info, etc) from leaking out. The portfolio editor allows users to fully manage and style their portfolio
+              page. Users can set passwords, adjust styles (colors, backgrounds), change the layout, build a web player
+              and add their own content via a Tiptap WYSIWYG. Portfolios are served at
+              https://{username}.lyrely.com/{custom-slug}. Users can set custom-slug to whatever they want or just leave
+              it with the default randomly generated url.
+            </p>
+            <p>
+              I chose Tiptap due to its ability to output both HTML and JSON for storage / rendering and because it is a
+              headless editor making it easy to integrate and style without significant CSS overrides. Tiptap also has
+              an extensive API for writing custom plugins, I took advantage of this to add image uploads with easy
+              inline resizing to the portfolio editor.
+            </p>
+          </div>
+        </div>
+        <div class="image-content">
+          <div class="image-block">
+            <img src="images/folioEditor.webp" alt="A screenshot of Lyrely's portfolio editor"/>
+            <div>Creating a portfolio</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+</body>
+</html>
